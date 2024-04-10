@@ -10,10 +10,10 @@ MVC - Padrão de projeto (Modelo, Visão e Controle)
 Testes - Testes unitários da API utilizando software Insomnia
 
 ## Funcionalidades a serem desenvolvidas:
-- CRUD de Cliente
+- CRUD de Clientes
 - CRUD de Telefones
 - CRUD de Veículos
-- CRUD de Aluguel
+- CRUD de Alugueis
 
 ### Como testar:
 
