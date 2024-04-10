@@ -6,7 +6,7 @@ const addVeiculo = (req, res) => {
     
     const { placa, modelo, marca, tipo, diaria } = req.body;
     if (placa && modelo && marca && tipo && diaria) {
-        con.query('INSERT INTO veiculo (placa, modelo, marca, tipo ENUM, diaria) VALUES (?, ?, ?, ?, ?)',
+        con.query('INSERT INTO veiculo (placa, modelo, marca, tipo, diaria) VALUES (?, ?, ?, ?, ?)',
             [placa, modelo, marca, tipo, diaria],
             (err, result) => {
                 if (err) {
@@ -50,10 +50,10 @@ const getVeiculo = (req, res) => {
 
 const updateVeiculo = (req, res) => {
 
-    const { placa, modelo, marca, ano } = req.body;
-    if (placa && modelo && marca && ano) {
-        con.query('UPDATE veiculo SET modelo = ?, marca = ?, ano = ? WHERE placa = ?', 
-        [modelo, marca, ano, placa], 
+    const { placa, modelo, marca, tipo, diaria } = req.body;
+    if (placa && modelo && marca && tipo && diaria) {
+        con.query('UPDATE veiculo SET modelo = ?, marca = ?, tipo = ?, diaria = ? WHERE placa = ?', 
+        [modelo, marca, tipo, diaria, placa], 
         (err, result) => {
             if (err) {
                 res.status(500).json({ error: err });

@@ -9,7 +9,7 @@ CREATE TABLE Cliente (
 
 CREATE TABLE Telefone (
     cpf VARCHAR(14),
-    numero VARCHAR(15) NOT NULL UNIQUE,
+    numeto VARCHAR(15) NOT NULL UNIQUE,
     foreign key (cpf) references Cliente(cpf)
 );
 

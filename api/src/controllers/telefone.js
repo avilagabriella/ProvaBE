@@ -4,16 +4,16 @@ const con = require('../connections/mysql');
 
 const addTelefone = (req, res) => {
     
-    const { matricula, numero } = req.body;
-    if (matricula && numero) {
-        con.query('INSERT INTO telefone (matricula, numero) VALUES (?, ?)',
-            [matricula, numero],
+    const { cpf, numero } = req.body;
+    if (cpf && numero) {
+        con.query('INSERT INTO telefone (cpf, numero) VALUES (?, ?)',
+            [cpf, numero],
             (err, result) => {
                 if (err) {
                     console.error('Erro ao adicionar telefone:', err);
                     res.status(500).json({ error: 'Erro ao adicionar telefone' });
                 } else {
-                    const newPhone = { matricula, numero };
+                    const newPhone = { cpf, numero };
                     res.status(201).json(newPhone);
                 }
             });
@@ -37,8 +37,8 @@ const getTelefones = (req, res) => {
 }
 
 const getTelefone = (req, res) => {
-    const sql = "SELECT * FROM manutencao WHERE matricula LIKE ?";
-    con.query(sql, `${[req.params.matricula]}`, (err, result) => {
+    const sql = "SELECT * FROM aluguel WHERE cpf LIKE ?";
+    con.query(sql, `${[req.params.cpf]}`, (err, result) => {
         if (err) {
             res.json(err);
         } else {
@@ -51,10 +51,10 @@ const getTelefone = (req, res) => {
 
 const updateTelefone = (req, res) => {
 
-    const { matricula, numero } = req.body;
-    if (matricula && numero) {
-        con.query('UPDATE telefone SET numero = ? WHERE matricula = ?', 
-        [numero, matricula], 
+    const { cpf, numero } = req.body;
+    if (cpf && numero) {
+        con.query('UPDATE telefone SET numero = ? WHERE cpf = ?', 
+        [numero, cpf], 
         (err, result) => {
             if (err) {
                 res.status(500).json({ error: err });
@@ -72,9 +72,9 @@ const updateTelefone = (req, res) => {
 
 const deleteTelefone = (req, res) => {
     
-    const { matricula } = req.params;
-    if (matricula) {
-        con.query('DELETE FROM telefone WHERE matricula = ?', [matricula], (err, result) => {
+    const { cpf } = req.params;
+    if (cpf) {
+        con.query('DELETE FROM telefone WHERE cpf = ?', [cpf], (err, result) => {
             if (err) {
                 res.status(500).json({ error: err });
             } else {

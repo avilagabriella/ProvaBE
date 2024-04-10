@@ -4,16 +4,16 @@ const con = require('../connections/mysql');
 
 const addAluguel = (req, res) => {
     
-    const { placa, matricula, inicio, fim, descricao } = req.body;
-    if (placa && matricula && inicio && descricao) {
-        con.query('INSERT INTO Aluguel (placa, matricula, inicio, fim, descricao) VALUES (?, ?, ?, ?, ?)',
-            [placa, matricula, inicio, fim, descricao],
+    const { placa, cpf, reserva, retirada, devolucao, subtotal } = req.body;
+    if (placa && cpf && reserva && retirada && devolucao && subtotal) {
+        con.query('INSERT INTO Aluguel (placa, cpf, reserva, retirada, devolucao, subtotal) VALUES (?, ?, ?, ?, ?, ?)',
+            [placa, cpf, reserva, retirada, devolucao, subtotal],
             (err, result) => {
                 if (err) {
-                    console.error('Erro ao adicionar manutenção:', err);
-                    res.status(500).json({ error: 'Erro ao adicionar manutenção' });
+                    console.error('Erro ao adicionar Aluguel:', err);
+                    res.status(500).json({ error: 'Erro ao adicionar Aluguel' });
                 } else {
-                    const newMaintenance = { id: result.insertId, placa, matricula, inicio, fim, descricao };
+                    const newMaintenance = { id: result.insertId, placa, cpf, reserva, retirada, devolucao, subtotal };
                     res.status(201).json(newMaintenance);
                 }
             });
@@ -28,7 +28,7 @@ const addAluguel = (req, res) => {
 const getAlugueis = (req, res) => {
     con.query('SELECT * FROM Aluguel', (err, result) => {
         if (err) {
-            res.status(500).json({ error: 'Erro ao listar manutenções' });
+            res.status(500).json({ error: 'Erro ao listar Aluguel' });
         } else {
             res.json(result);
         }
@@ -52,10 +52,10 @@ const getAluguel = (req, res) => {
 
 const updateAluguel = (req, res) => {
 
-    const { id, placa, matricula, inicio, fim, descricao } = req.body;
-    if (id && placa && matricula && inicio && descricao) {
-        con.query('UPDATE Aluguel SET placa = ?, matricula = ?, inicio = ?, fim = ?, descricao = ? WHERE id = ?', 
-        [placa, matricula, inicio, fim, descricao, id], 
+    const { placa, cpf, reserva, retirada, devolucao, subtotal} = req.body;
+    if (placa && cpf && reserva && retirada && devolucao && subtotal) {
+        con.query('UPDATE Aluguel SET placa = ?, cpf = ?, reserva = ?, retirada = ?, devolucao = ?, subtotal = ? WHERE id = ?', 
+        [placa, cpf, reserva, retirada, devolucao, subtotal, id], 
         (err, result) => {
             if (err) {
                 res.status(500).json({ error: err });
@@ -80,9 +80,9 @@ const deleteAluguel = (req, res) => {
                 res.status(500).json({ error: err });
             } else {
                 if (result.affectedRows === 0) {
-                    res.status(404).json({ error: 'Manutenção não encontrada' });
+                    res.status(404).json({ error: 'Aluguel não encontrada' });
                 } else {
-                    res.status(200).json({ message: 'Manutenção removida com sucesso' });
+                    res.status(200).json({ message: 'Aluguel removida com sucesso' });
                 }
             }
         });

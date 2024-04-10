@@ -11,7 +11,7 @@ const addCliente = (req, res) => {
             (err, result) => {
                 if (err) {
                     console.error('Erro ao adicionar funcionário:', err);
-                    res.status(500).json({ error: 'Erro ao adicionar funcionário' });
+                    res.status(500).json({ error: 'Erro ao adicionar Cliente' });
                 } else {
                     const newEmployee = { cpf, nome_cliente };
                     res.status(201).json(newEmployee);
@@ -29,7 +29,7 @@ const getClientes = (req, res) => {
 
     con.query('SELECT * FROM cliente', (err, result) => {
         if (err) {
-            res.status(500).json({ error: 'Erro ao listar funcionários' });
+            res.status(500).json({ error: 'Erro ao listar Cliente' });
         } else {
             res.json(result);
         }
